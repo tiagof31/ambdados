@@ -1,0 +1,43 @@
+1-) Liste todos os professores (SQL e Álgebra Relacional)
+SQL: select * from Professor;
+AR: ¶ID_Professor, Nome, Matricula, Telefone, Endereco(Professor)
+
+2-) Liste o id e nome dos alunos (SQL e Álgebra Relacional)
+SQL: select ID_Aluno, Nome from Aluno;
+AR: ¶ID_Aluno, Nome(Aluno)
+
+3-) Liste todos os alunos que nasceram no mês de março (SQL e Álgebra Relacional)
+SQL: select * from Aluno where month(Data_de_nascimento) = 3;
+AR: σ Month(Data_de_nascimento) = 3(Aluno)
+
+4-) Selecione a quantidade de alunos cadastrados no banco (SQL)
+select count(*) from Aluno;
+
+5-) Faça uma consulta que retorne o nome do aluno e o nome das disciplinas matriculadas
+(SQL)
+select A.Nome, D.Nome from Aluno A
+join Aluno_Disciplina AD on A.ID_Aluno = AD.ID_Aluno
+join Disciplina D on AD.ID_Disciplina = D.ID_Disciplina;
+
+6-) Faça uma consulta para retornar o nome do professor e a quantidade de de turmas que
+o professor tem (SQL)
+select P.Nome, count(T.ID_Turma) from Professor P
+join Turma T on P.ID_Professor = T.ID_Professor
+group by P.Nome;
+
+7-) Liste todos os alunos e sua média global (SQL)
+select A.Nome, AVG(H.Media) from Aluno
+join Historico_Academico H on A.ID_Aluno = H.ID_Aluno
+group by A.Nome;
+
+8-) Delete todos os alunos (SQL)
+delete from Aluno;
+
+9-) Incremente em 1 dia a data de nascimento de todos os alunos (SQL)
+update Aluno set Data_de_nascimento = date_add(Data_de_nascimento, interval 1 day);
+
+10-) Insira 3 alunos em um insert só (SQL)
+insert into Aluno (Nome, Matricula, Curso, Telefone, Endereco, Data_de_nascimento) values 
+('Paulo', '11111111', 'Ciência da Computação', '999999999', 'Rua A - Bairro B', '2000-01-01'),
+('Pedro', '11111112', 'Ciência da Computação', '999999998', 'Rua B - Bairro B', '2000-02-02'),
+('Rafael', '11111113', 'Ciência da Computação', '999999997', 'Rua C - Bairro B', '2000-03-03');
